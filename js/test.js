@@ -13,16 +13,35 @@ function token() {
         let data = response.data;
         console.log(data);
         let token = data.access_token;
-        getData(token);
-    }).catch((error) => console.log(error))
+
+        let keywords = document.getElementById('keywords');
+        let type = document.getElementById('type');
+        let territory = document.getElementById('territory');
+        let limit = document.getElementById('limit');
+        let availability = document.getElementById('availability');
+        document.getElementById('search').addEventListener('click', () => {
+            if (keywords.value) {
+                getData(token, keywords.value, type.value, territory.value, limit.value, availability.value);
+            } else {
+                alert('請輸入關鍵字');
+            };
+        });
+    }).catch((error) => {
+        console.log(error)
+    })
 };
 token();
 
-function getData(token) { 
+function getData(token, q, type, territory, limit, availability) {
     let form = new FormData();
     axios({
         method: 'get',
-        url: 'https://api.kkbox.com/v1.1/search?q=為你我受冷風吹&type=track&territory=TW',
+        url: 'https://api.kkbox.com/v1.1/search' +
+            '?q=' + q +
+            '&type=' + type +
+            '&territory=' + territory +
+            '&limit=' + limit + 
+            '&availability=' + availability,
         data: form,
         headers: {
             'accept': 'application/json',
@@ -31,5 +50,7 @@ function getData(token) {
     }).then((response) => {
         let data = response.data;
         console.log(response.data);
-    }).catch((error) => console.log(error))
+    }).catch((error) => {
+        console.log(error)
+    })
 };

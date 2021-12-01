@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./css/bs.css">
 	<title>test</title>
+	<style>
+		label {
+			padding: 0 !important;
+			margin-bottom: 4px;
+		}
+
+		input,
+		select {
+			margin-bottom: 16px;
+		}
+	</style>
 </head>
+
 <body>
+	<div class="container pt-3">
+		<div class="row">
+			<div class="col-6 border p-5 rounded">
+				<label>*關鍵字</label>
+				<input id="keywords" class="form-control" placeholder="搜尋歌曲">
+				<!---->
+				<label>*type 類型</label>
+				<select id="type" class="form-control">
+					<option value="track" selected>track</option>
+					<option value="album">album</option>
+					<option value="artist">artist</option>
+					<option value="playlist">playlist</option>
+				</select>
+				<!----> 
+				<label>*territory 區域</label>
+				<select id="territory" class="form-control">
+					<option value="TW" selected>TW 台灣</option>
+					<option value="SG">SG 新加玻</option>
+					<option value="MY">MY</option>
+					<option value="JP">JP 日本</option>
+					<option value="HK">HK 香港</option>
+				</select>
+				<!-- Default: 15；>=1 and <= 50-->
+				<label>limit 最多筆數</label>
+				<input id="limit" class="form-control" type="number" min="1" max="50" value="15">
+				<!----> 
+				<label>availability 授權</label>
+				<select id="availability" class="form-control">
+					<option value="true" selected>是</option>
+					<option value="false">否</option>
+				</select>
+				<!---->
+				<button id="search" class="btn btn-primary w-100">搜尋</button>
+			</div>
+			<div class="col-6"></div>
+			<div class="col-6"></div>
+			<div class="col-6"></div>
+		</div>
+	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
 	<script src="./js/test.js"></script>
 </body>
+
 </html>
