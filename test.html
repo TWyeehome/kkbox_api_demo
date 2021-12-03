@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./css/bs.css">
-	<title>test</title>
+	<title>KKBOX API DEMO</title>
 	<style>
 		label {
 			padding: 0 !important;
@@ -17,21 +17,51 @@
 			margin-bottom: 16px;
 		}
 
-		.col-6 {
-			margin-bottom: 16px;
+		.col-6,
+		.col-12 {
+			margin-bottom: 24px;
+		}
+
+		.card {
+			height: 100%;
+		}
+
+		.btn-request {
+			color: #fff;
+			background-color: #0b5ed7;
+			border-color: #0a58ca;
+			align-self: flex-end;
+			width: 100%;
+			margin-top: auto;
 		}
 	</style>
 </head>
 
-<body>
-	<div class="container pt-3">
+<body class="bg-dark">
+	<main id="vueApp" class="container">
+		<h1 class="text-light text-center py-4">KKBOX API DEMO</h1>
 		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">專案設定</div>
+					<div class="card-body d-flex flex-column">
+						<label>*id</label>
+						<input id="id" class="form-control" value="120af9d8450d4fbcf81ee04982cbb7ab" disabled>
+						<label>*secret</label>
+						<input id="secret" class="form-control" value="d21ab62e9875ada332d19b9b71ab507e" disabled>
+						<a target="_blank"
+							href="https://docs-zhtw.kkbox.codes/#overview--step-2-%E7%8D%B2%E5%8F%96-access-token">KKBOX
+							API 文件</a>
+					</div>
+				</div>
+			</div>
+			<!-- Search -->
 			<div class="col-6">
-				<div class="card h-100">
-					<div class="card-header">search</div>
-					<div class="card-body">
+				<div class="card">
+					<div class="card-header">Search</div>
+					<div class="card-body d-flex flex-column">
 						<label>*關鍵字</label>
-						<input id="keywords" class="form-control" placeholder="搜尋歌曲" value="123">
+						<input id="keywords" class="form-control" placeholder="搜尋歌曲" value="flash">
 						<!---->
 						<label>*type 類型</label>
 						<select id="type" class="form-control">
@@ -59,18 +89,29 @@
 							<option value="false">否</option>
 						</select>
 						<!---->
-						<button id="search" class="btn btn-primary w-100">Request</button>
+						<button id="search" class="btn btn-request">Request</button>
+					</div>
+				</div>
+			</div>
+			<!-- iframe -->
+			<div class="col-6">
+				<div class="card">
+					<div class="card-header">iframe_album</div>
+					<div class="card-body d-flex flex-column">
+						<!-- 若要自動播放，須在 <iframe> 的屬性中加入 allow="autoplay" -->
+						<iframe src="https://widget.kkbox.com/v1/?id=GonWvutNzZWl9MKBmf&type=album&terr=SG&lang=en"
+							width="100%" height="100%"></iframe>
 					</div>
 				</div>
 			</div>
 			<!-- Get an album -->
 			<div class="col-6">
-				<div class="card h-100">
+				<div class="card">
 					<div class="card-header">Get an album</div>
-					<div class="card-body">
-						<label>*album_id 專輯序號</label>
+					<div class="card-body d-flex flex-column">
+						<label>*album_id</label>
 						<input id="albumId" class="form-control" value="KmRKnW5qmUrTnGRuxF">
-						<label>*territory 區域</label>
+						<label>*territory</label>
 						<select id="albumTerritory" class="form-control">
 							<option value="TW" selected>TW 台灣</option>
 							<option value="SG">SG 新加玻</option>
@@ -78,15 +119,15 @@
 							<option value="JP">JP 日本</option>
 							<option value="HK">HK 香港</option>
 						</select>
-						<button id="albumDetail" class="btn btn-primary w-100">Request</button>
+						<button id="albumDetail" class="btn btn-request">Request</button>
 					</div>
 				</div>
 			</div>
 			<!-- Get tracks in an album -->
 			<div class="col-6">
-				<div class="card h-100">
+				<div class="card">
 					<div class="card-header">Get tracks in an album</div>
-					<div class="card-body">
+					<div class="card-body d-flex flex-column">
 						<label>*album_id 專輯序號</label>
 						<input id="albumTracksId" class="form-control" value="KmRKnW5qmUrTnGRuxF">
 						<label>*territory 區域</label>
@@ -97,19 +138,19 @@
 							<option value="JP">JP 日本</option>
 							<option value="HK">HK 香港</option>
 						</select>
-						<label>*offset</label>
+						<label>offset (>=0)</label>
 						<input id="albumTracksOffset" class="form-control" type="number" value="0">
-						<label>*limit</label>
+						<label>limit (Default: 100, >=1 and <= 500)</label>
 						<input id="albumTracksLimit" class="form-control" type="number" value="100">
-						<button id="albumTracksDetail" class="btn btn-primary w-100">Request</button>
+						<button id="albumTracksDetail" class="btn btn-request">Request</button>
 					</div>
 				</div>
 			</div>
 			<!-- Get an artist -->
 			<div class="col-6">
-				<div class="card h-100">
-					<div class="card-header">Get an album</div>
-					<div class="card-body">
+				<div class="card">
+					<div class="card-header">Get an artist</div>
+					<div class="card-body d-flex flex-column">
 						<label>*artist_id</label>
 						<input id="artistId" class="form-control" value="8q3_xzjl89Yakn_7GB">
 						<label>*territory 區域</label>
@@ -120,26 +161,128 @@
 							<option value="JP">JP 日本</option>
 							<option value="HK">HK 香港</option>
 						</select>
-						<button id="artistDetail" class="btn btn-primary w-100">Request</button>
+						<button id="artistDetail" class="btn btn-request">Request</button>
 					</div>
 				</div>
 			</div>
-			<!-- iframe -->
+			<!-- Get albums by an artist -->
 			<div class="col-6">
-				<div class="card h-100">
-					<div class="card-header">iframe_album</div>
-					<div class="card-body">
-						<!-- 若要自動播放，須在 <iframe> 的屬性中加入 allow="autoplay" -->
-						<iframe src="https://widget.kkbox.com/v1/?id=GonWvutNzZWl9MKBmf&type=album&terr=SG&lang=en"
-							width="100%" height="100%"></iframe>
+				<div class="card">
+					<div class="card-header">Get albums by an artist</div>
+					<div class="card-body d-flex flex-column">
+						<label>*artist_id</label>
+						<input id="albumsId" class="form-control" value="8q3_xzjl89Yakn_7GB">
+						<label>*territory 區域</label>
+						<select id="albumsTerritory" class="form-control">
+							<option value="TW" selected>TW 台灣</option>
+							<option value="SG">SG 新加玻</option>
+							<option value="MY">MY</option>
+							<option value="JP">JP 日本</option>
+							<option value="HK">HK 香港</option>
+						</select>
+						<label>offset (>=0)</label>
+						<input id="albumsOffset" class="form-control" type="number" value="0">
+						<label>limit (Default: 100, >=1 and <= 500)</label>
+						<input id="albumsLimit" class="form-control" type="number" value="100">
+						<button id="albumsDetail" class="btn btn-request">Request</button>
+					</div>
+				</div>
+			</div>
+			<!-- Get artists similar to a given artist -->
+			<div class="col-6">
+				<div class="card">
+					<div class="card-header">Get artists similar to a given artist</div>
+					<div class="card-body d-flex flex-column">
+						<label>*artist_id</label>
+						<input id="artistsSimilarId" class="form-control" value="8q3_xzjl89Yakn_7GB">
+						<label>*territory 區域</label>
+						<select id="artistsSimilarTerritory" class="form-control">
+							<option value="TW" selected>TW 台灣</option>
+							<option value="SG">SG 新加玻</option>
+							<option value="MY">MY</option>
+							<option value="JP">JP 日本</option>
+							<option value="HK">HK 香港</option>
+						</select>
+						<label>*offset (>=0)</label>
+						<input id="artistsSimilarOffset" class="form-control" type="number" value="0">
+						<label>*limit (Default: 20, >=1 and <= 20)</label>
+								<input id="artistsSimilarLimit" class="form-control" type="number" value="20">
+								<button id="artistsSimilarDetail" class="btn btn-request">Request</button>
+					</div>
+				</div>
+			</div>
+			<!-- Get an artist's top tracks -->
+			<div class="col-6">
+				<div class="card">
+					<div class="card-header">Get an artist's top tracks</div>
+					<div class="card-body d-flex flex-column">
+						<label>*artist_id</label>
+						<input id="artistTopId" class="form-control" value="8q3_xzjl89Yakn_7GB">
+						<label>*territory 區域</label>
+						<select id="artistTopTerritory" class="form-control">
+							<option value="TW" selected>TW 台灣</option>
+							<option value="SG">SG 新加玻</option>
+							<option value="MY">MY</option>
+							<option value="JP">JP 日本</option>
+							<option value="HK">HK 香港</option>
+						</select>
+						<label>*offset (>=0)</label>
+						<input id="artistTopOffset" class="form-control" type="number" value="0">
+						<label>*limit (Default: 100, >=1 and <= 500)</label>
+								<input id="artistTopLimit" class="form-control" type="number" value="500">
+								<button id="artistTopDetail" class="btn btn-request">Request</button>
+					</div>
+				</div>
+			</div>
+			<!-- Get chart playlists -->
+			<div class="col-6">
+				<div class="card">
+					<div class="card-header">Get chart playlists</div>
+					<div class="card-body d-flex flex-column">
+						<label>*territory 區域</label>
+						<select id="chartPlaylistsTerritory" class="form-control">
+							<option value="TW" selected>TW 台灣</option>
+							<option value="SG">SG 新加玻</option>
+							<option value="MY">MY</option>
+							<option value="JP">JP 日本</option>
+							<option value="HK">HK 香港</option>
+						</select>
+						<label>*offset (>=0)</label>
+						<input id="chartPlaylistsOffset" class="form-control" type="number" value="0">
+						<label>*limit (Default: 50, >=1 and <= 50)</label>
+								<input id="chartPlaylistsLimit" class="form-control" type="number" value="50">
+								<button id="chartPlaylistsDetail" class="btn btn-request">Request</button>
+					</div>
+				</div>
+			</div>
+			<!-- Get a chart playlist -->
+			<div class="col-6">
+				<div class="card">
+					<div class="card-header">Get a chart playlist</div>
+					<div class="card-body d-flex flex-column">
+						<label>*playlist_id</label>
+						<input id="playlistId" class="form-control" type="text" value="X-6lSz-IwzDxkPuDP-">
+						<label>*territory 區域</label>
+						<select id="aChartPlaylistsTerritory" class="form-control">
+							<option value="TW" selected>TW 台灣</option>
+							<option value="SG">SG 新加玻</option>
+							<option value="MY">MY</option>
+							<option value="JP">JP 日本</option>
+							<option value="HK">HK 香港</option>
+						</select>
+						<button id="aChartPlaylistsDetail" class="btn btn-request">Request</button>
 					</div>
 				</div>
 			</div>
 			<div class="col-6"></div>
 			<div class="col-6"></div>
 		</div>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+	</main>
+	<footer class="bg-light d-flex p-3 justify-content-center">
+		<p class="mb-0">editor: Michael</p>
+	</footer>
+	<script src="./js/vue.js"></script>
+	<script src="./js/axios.js"></script>
 	<script src="./js/test.js"></script>
 </body>
 
