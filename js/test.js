@@ -28,7 +28,8 @@ const app = new Vue({
                 let data = response.data;
                 console.log(data);
                 const token = data.access_token;
-
+                if (data.error) { return alert(data.error); };
+                    
                 // 搜尋
                 document.getElementById('search').addEventListener('click', () => {
                     if (document.getElementById('keywords').value) {
